@@ -1,0 +1,165 @@
+
+.filterBarRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filterLeftGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filterLabelText {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.filterPillBtn {
+  background: var(--white);
+  color: var(--grayDark);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.filterPillBtn.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.fleetStatusText {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.vehicleGridList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.vehicleCard {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #f1f5f9;
+  transition: var(--transition);
+}
+
+.vehicleCard:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+.cardTopBadges {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusReadyBadge {
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 9999px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.statusRentedBadge {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-radius: 9999px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.vehicleNameTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 2px 0 0 0;
+}
+
+.specDetailRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.specDetailStatus {
+  color: #059669;
+  font-weight: 600;
+}
+
+.vehiclePriceDaily {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 4px;
+}
+
+.vehiclePriceDaily span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray);
+}
+
+.rentThisVehicleBtn {
+  background: #3b82f6;
+  color: var(--white);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  transition: var(--transition);
+}
+
+.rentThisVehicleBtn:hover {
+  background: var(--primary);
+}
+
+.notifCard {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.notifHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 11px;
+  color: var(--gray);
+  font-weight: 600;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Rental - Login & Sign Up</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <header class="topBrandHeader">
+    <h1 class="brandTitleText">V E H I C L E &nbsp; R E N T A L</h1>
+  </header>
+
+
+  <div class="mainContentWrapper">
+    <div class="authContainerCard">
+
+      <div class="authTabsNav">
+        <div class="authTabItem active" id="tabLoginBtn" onclick="switchAuthTab('login')">LOGIN</div>
+        <div class="authTabItem" id="tabRegisterBtn" onclick="switchAuthTab('register')">SIGN UP</div>
+      </div>
+
+      <div id="authAlert" class="alertBox alertDanger" style="display: none;"></div>
+
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="formGroup">
+          <label class="formLabel">Username</label>
+          <div class="inputWrapper">
+            <input type="text" id="loginUsername" class="formControl" placeholder="Enter your username" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label class="formLabel">Password</label>
+          <div class="inputWrapper">
+            <input type="password" id="loginPassword" class="formControl" placeholder="Enter your password" required autocomplete="current-password">
+            <span class="passwordToggleIcon" onclick="togglePasswordVisibility('loginPassword', this)" title="Hiển thị/Ẩn mật khẩu">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" class="authSubmitBtn">Login</button>
+      </form>
+
+
+      <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
+        <div class="formGroup">
+          <label class="formLabel">Username</label>
+          <div class="inputWrapper">
+            <input type="text" id="regUsername" class="formControl" placeholder="Choose a username" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label class="formLabel">Password</label>
+          <div class="inputWrapper">
+            <input type="password" id="regPassword" class="formControl" placeholder="Create a password" required autocomplete="new-password">
+            <span class="passwordToggleIcon" onclick="togglePasswordVisibility('regPassword', this)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" class="authSubmitBtn">Sign Up</button>
+      </form>
+
+      <div class="quickLoginDemo">
+        <div class="quickLoginTitle">Quick Login Demo</div>
+        <div class="quickLoginBtns">
+          <button type="button" class="quickPillBtn" onclick="quickFill('customer1', 'customer123')">Customer</button>
+          <button type="button" class="quickPillBtn" onclick="quickFill('manager1', 'manager123')">Manager</button>
+          <button type="button" class="quickPillBtn" onclick="quickFill('admin', 'admin123')">Admin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    function togglePasswordVisibility(inputId, iconEl) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        iconEl.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+          <line x1="1" y1="1" x2="23" y2="23"></line>
+        </svg>`;
+      } else {
+        input.type = 'password';
+        iconEl.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>`;
+      }
+    }
+  </script>
+</body>
+</html>
