@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer - Vehicle Rental</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/customer.css">
+</head>
+<body>
+  <header class="topBrandHeader">
+    <h1 class="brandTitleText">V E H I C L E &nbsp; R E N T A L</h1>
+  </header>
+
+  <div class="topToolbarRow">
+    <div class="topUserPill">
+      <button class="iconBtn" onclick="openNotifModal()" title="Thông báo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span id="notifBadge" class="notifBadgeCount" style="display:none;">0</span>
+      </button>
+
+      <div class="userAvatarCircle" id="avatarInitial" title="Customer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+
+      <button class="iconBtn" onclick="api.logout()" title="Đăng xuất">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mainContentWrapper">
+    <div class="mainContentCard">
+      <div class="navTabsRow">
+        <span class="navTabItem active" id="tabNavVehicles" onclick="switchCustomerTab('vehicles')">
+          Available Vehicles
+        </span>
+        <span class="navTabItem" id="tabNavHistory" onclick="switchCustomerTab('history')">
+          My Rental History
+        </span>
+      </div>
+
+      <div id="tabPanelVehicles">
+        <!-- Filter Row -->
+        <div class="filterBarRow">
+          <div class="filterLeftGroup">
+            <span class="filterLabelText">Filter by type:</span>
+            <button class="filterPillBtn active" id="filterAll" onclick="filterCustomerVehicles('All')">
+              All Vehicles
+            </button>
+            <button class="filterPillBtn" id="filterCar" onclick="filterCustomerVehicles('Car')">
+              Cars
+            </button>
+            <button class="filterPillBtn" id="filterMoto" onclick="filterCustomerVehicles('Motobike')">
+              Motorbikes
+            </button>
+          </div>
+          <div id="fleetStatusText" class="fleetStatusText">Fleet: Loading...</div>
+        </div>
+
+        <div class="vehicleGridList" id="vehicleGridList">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </div>
+      <div id="tabPanelHistory" style="display: none;">
+        <div class="contentTableCard">
+          <div class="cardHeaderRow">
+            <h3 class="cardHeaderTitle">My Rental History</h3>
+          </div>
+          <div class="tableResponsive">
+            <table class="appTable">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Rental Vehicle</th>
+                  <th>License Plate</th>
+                  <th>Type</th>
+                  <th>Rental Period</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                  <th style="text-align:center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <tr><td colspan="8" style="text-align:center; padding: 24px;">Loading rental history...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="rentModal" onclick="handleCustomerOverlay(event, 'rentModal')">
+    <div class="modalBox" style="max-width: 500px;">
+      <div class="modalHeader">
+        <h3 class="modalTitle" id="rentModalTitle">Rent Vehicle</h3>
+        <button class="modalCloseBtn" onclick="closeRentModal()">✕ Close</button>
+      </div>
+      <div class="modalBody">
+        <div id="rentModalAlert" class="alertBox alertDanger" style="display: none;"></div>
+
+        <div style="background:#f8fafc; border-radius:12px; padding:14px; margin-bottom:18px; border:1px solid #e2e8f0;">
+          <div style="font-weight:700; color:#0f172a; font-size:15px;" id="rentVehName">Vehicle Name</div>
+          <div style="display:flex; justify-content:space-between; margin-top:6px; font-size:13px; color:#64748b;">
+            <span>License Plate: <strong id="rentVehPlate" style="color:#0f172a;">-</strong></span>
+            <span>Rental Price: <strong id="rentVehPriceText" style="color:#2563eb;">-</strong> / day</span>
+          </div>
+        </div>
+
+        <form id="rentForm" onsubmit="submitCustomerRental(event)">
+          <input type="hidden" id="rentVehId">
+          <input type="hidden" id="rentVehPrice">
+
+          <div class="formGroup">
+            <label class="formLabel">CCCD - 12 digits *</label>
+            <input type="text" id="rentCccd" class="formControl" placeholder="Enter 12-digit CCCD..." required maxlength="12" pattern="\d{12}">
+          </div>
+
+          <div class="formGroup">
+            <label class="formLabel">License Number (GPLX) *</label>
+            <input type="text" id="rentLicense" class="formControl" placeholder="Enter license number..." required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="formGroup">
+              <label class="formLabel">Start Date *</label>
+              <input type="date" id="rentStartDate" class="formControl" required onchange="calcCustomerEstimatedTotal()">
+            </div>
+            <div class="formGroup">
+              <label class="formLabel">End Date *</label>
+              <input type="date" id="rentEndDate" class="formControl" required onchange="calcCustomerEstimatedTotal()">
+            </div>
+          </div>
+
+          <div class="formGroup">
+            <label class="formLabel">Deposit Amount (Tiền đặt cọc) *</label>
+            <input type="number" id="rentDeposit" class="formControl" placeholder="Deposit amount..." required min="0" oninput="this.dataset.auto='0'">
+            <small style="color:#64748b; font-size:12px;">(Tự động tính 30% tổng tiền thuê, sẽ hoàn lại nếu đơn bị từ chối)</small>
+          </div>
+
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:12px; margin-top:10px;">
+            <div style="display:flex; justify-content:space-between; font-size:13px; color:#1e40af; margin-bottom:4px;">
+              <span>Number of rental days:</span>
+              <strong id="rentDaysText">2 days</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700; color:#1e40af;">
+              <span>Estimated Total:</span>
+              <strong id="rentEstimatedTotal" style="color:#2563eb; font-size:16px;">0 ₫</strong>
+            </div>
+          </div>
+
+          <div class="modalFooter" style="padding: 16px 0 0 0; background:transparent; border-top:none; margin-top:16px;">
+            <button type="button" class="btn btnSecondary" onclick="closeRentModal()">✕ Close</button>
+            <button type="submit" id="btnConfirmRent" class="btn btnPrimary" style="background:#3b82f6;">Confirm Rental</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="notifModal" onclick="handleCustomerOverlay(event, 'notifModal')">
+    <div class="modalBox" style="max-width: 480px;">
+      <div class="modalHeader">
+        <h3 class="modalTitle">Personal notification</h3>
+        <button class="modalCloseBtn" onclick="closeNotifModal()">✕ Close</button>
+      </div>
+      <div class="modalBody" id="notifListContainer">
+        <div style="text-align:center; padding: 24px; color: var(--gray);">Loading notifications...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/customer.js"></script>
+</body>
+</html>

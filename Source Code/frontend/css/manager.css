@@ -1,0 +1,106 @@
+.statsGridRow {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.managerStatsGrid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.statCardItem {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid #f1f5f9;
+}
+
+.statCardTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statCardValue {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.statCardDesc {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+
+.filterBarRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filterLeftGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filterLabelText {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+.filterPillBtn {
+  background: var(--white);
+  color: var(--grayDark);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.filterPillBtn.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.fleetStatusText {
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.valOrange { color: #f59e0b; }
+.valDark { color: #0f172a; }
+.valBlue { color: #2563eb; }
+.valTeal { color: #0d9488; }
+
+@media (max-width: 1024px) {
+  .managerStatsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .managerStatsGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,571 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+  --primary: #2563eb;
+  --primaryHover: #1d4ed8;
+  --primaryLight: #eff6ff;
+  --success: #10b981;
+  --successHover: #059669;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --dangerHover: #dc2626;
+  --purple: #8b5cf6;
+  --dark: #0f172a;
+  --grayDark: #334155;
+  --gray: #64748b;
+  --grayLight: #f1f5f9;
+  --border: #e2e8f0;
+  --white: #ffffff;
+  --bgLight: #ffffff;
+  --panelBg: #f1f3f7;
+  --radius: 12px;
+  --transition: all 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  background-color: var(--bgLight);
+  color: var(--dark);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.topBrandHeader {
+  background: #D9D9D9;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  padding: 28px 24px 24px 24px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  position: relative;
+}
+
+.brandTitleText {
+  font-family: 'Playfair Display', 'Times New Roman', Georgia, serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: #111111;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.topToolbarRow {
+  max-width: 100%;
+  margin: 0;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.topUserPill {
+  background: var(--white);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  border: 1px solid var(--border);
+}
+
+.userAvatarCircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #a855f7;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: default;
+}
+
+.userDisplayName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.userRoleBadge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  background: #e0e7ff;
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.iconBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray);
+  font-size: 18px;
+  padding: 4px;
+  border-radius: 50%;
+  transition: var(--transition);
+  position: relative;
+}
+
+.iconBtn:hover {
+  color: var(--dark);
+}
+
+.notifBadgeCount {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--danger);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainContentWrapper {
+  max-width: 100%;
+  margin: 0 ;
+  padding: 0;
+}
+
+.mainContentCard {
+  background: #D9D9D9;
+  border-radius: 36px 36px 0 0;
+  padding: 32px 36px 60px 36px;
+  min-height: calc(100vh - 140px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.navTabsRow {
+  display: flex;
+  gap: 28px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+  margin-bottom: 22px;
+  overflow-x: auto;
+}
+
+.navTabItem {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray);
+  padding-bottom: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.navTabItem.active {
+  color: var(--primary);
+  font-weight: 600;
+  border-bottom-color: var(--primary);
+}
+
+.navTabItem:hover {
+  color: var(--dark);
+}
+
+.contentTableCard {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  border: 1px solid #f1f5f9;
+}
+
+.cardHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cardHeaderTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.realtimeBadge {
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tableResponsive {
+  overflow-x: auto;
+}
+
+.appTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.appTable th {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.appTable td {
+  font-size: 13px;
+  padding: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--grayDark);
+  vertical-align: middle;
+}
+
+.appTable tr:hover td {
+  background: #fbfcfe;
+}
+
+.licensePlatePill {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  color: var(--gray);
+  font-family: monospace;
+  display: inline-block;
+  width: fit-content;
+}
+
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.formLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.formControl {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--dark);
+  transition: var(--transition);
+  outline: none;
+}
+
+.formControl:focus {
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.2);
+}
+
+.formControl::placeholder {
+  color: #cbd5e1;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.btnPrimary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btnPrimary:hover {
+  background: var(--primaryHover);
+}
+
+.btnSuccess {
+  background: var(--success);
+  color: var(--white);
+}
+
+.btnSuccess:hover {
+  background: var(--successHover);
+}
+
+.btnDanger {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.btnDanger:hover {
+  background: var(--dangerHover);
+}
+
+.btnSecondary {
+  background: var(--grayLight);
+  color: var(--grayDark);
+  border: 1px solid var(--border);
+}
+
+.btnSecondary:hover {
+  background: #e2e8f0;
+}
+
+.btnOutline {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btnOutline:hover {
+  background: var(--primaryLight);
+}
+
+.btnSm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btnApprove {
+  background: var(--success);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btnApprove:hover {
+  background: var(--successHover);
+}
+
+.btnReject {
+  background: var(--danger);
+  color: var(--white);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btnReject:hover {
+  background: var(--dangerHover);
+}
+
+.statusBadge {
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.statusApproved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.statusPending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.statusRejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.statusCompleted {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.vehicleTypeTag {
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-transform: uppercase;
+}
+
+.tagCar {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.tagMoto {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.alertBox {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alertDanger {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.alertSuccess {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.modalOverlay.active {
+  display: flex;
+}
+
+.modalBox {
+  background: var(--white);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  margin: auto;
+  overflow: hidden;
+  animation: modalSlideIn 0.25s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modalHeader {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.modalCloseBtn {
+  background: #f1f5f9;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--gray);
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.modalCloseBtn:hover {
+  background: #e2e8f0;
+  color: var(--dark);
+}
+
+.modalBody {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+.modalFooter {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  background: #f8fafc;
+  flex-shrink: 0;
+}
+@media (max-width: 640px) {
+  .topBrandHeader {
+    padding: 20px 16px;
+  }
+  .brandTitleText {
+    font-size: 20px;
+    letter-spacing: 0.2em;
+  }
+  .mainContentCard {
+    padding: 20px 16px;
+  }
+}

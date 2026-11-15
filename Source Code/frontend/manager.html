@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager - Vehicle Rental</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/manager.css">
+</head>
+<body>
+
+  <header class="topBrandHeader">
+    <h1 class="brandTitleText">V E H I C L E &nbsp; R E N T A L</h1>
+  </header>
+
+
+  <div class="topToolbarRow">
+    <div class="topUserPill">
+      <div class="userAvatarCircle" title="Manager">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <button class="iconBtn" onclick="api.logout()" title="Logout">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" y1="12" x2="9" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+
+  <div class="mainContentWrapper">
+    <div class="mainContentCard">
+
+      <div class="statsGridRow managerStatsGrid">
+        <div class="statCardItem">
+          <div class="statCardTitle">PENDING REQUESTS</div>
+          <div class="statCardValue valOrange" id="statPendingCount">0</div>
+          <div class="statCardDesc">Review and approve or reject requests</div>
+        </div>
+
+        <div class="statCardItem">
+          <div class="statCardTitle">TOTAL VEHICLES IN STOCK</div>
+          <div class="statCardValue valDark" id="statTotalVehicles">0</div>
+          <div class="statCardDesc">Includes vehicles currently rented out</div>
+        </div>
+
+        <div class="statCardItem">
+          <div class="statCardTitle">AVAILABLE CARS</div>
+          <div class="statCardValue valBlue" id="statAvailableCars">0</div>
+          <div class="statCardDesc">Ready for customers</div>
+        </div>
+
+        <div class="statCardItem">
+          <div class="statCardTitle">AVAILABLE MOTORBIKES</div>
+          <div class="statCardValue valTeal" id="statAvailableMotos">0</div>
+          <div class="statCardDesc">Ready for customers</div>
+        </div>
+      </div>
+
+      <div class="navTabsRow">
+        <span class="navTabItem active" id="tabBtnOrders" onclick="switchManagerTab('orders')">
+          Pending Rental Requests
+        </span>
+        <span class="navTabItem" id="tabBtnVehicles" onclick="switchManagerTab('vehicles')">
+          Vehicle Inventory (Add / Edit / Delete / Filter)
+        </span>
+        <span class="navTabItem" id="tabBtnRented" onclick="switchManagerTab('rented')">
+          Rental Customers
+        </span>
+      </div>
+
+
+      <div id="tabPanelOrders">
+        <div class="contentTableCard">
+          <div class="tableResponsive">
+            <table class="appTable">
+              <thead>
+                <tr>
+                  <th>ORDER ID</th>
+                  <th>CUSTOMER</th>
+                  <th>RENTAL VEHICLE</th>
+                  <th>NATIONAL ID / LICENSE</th>
+                  <th>RENTAL PERIOD</th>
+                  <th>TOTAL</th>
+                  <th style="text-align:center;">APPROVAL ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="pendingOrdersBody">
+                <tr><td colspan="7" style="text-align:center; padding: 24px;">Loading pending requests...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="tabPanelVehicles" style="display: none;">
+        <div class="contentTableCard">
+          <div class="cardHeaderRow">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <h3 class="cardHeaderTitle">Vehicle Inventory</h3>
+              <div class="filterLeftGroup">
+                <button class="filterPillBtn active" id="mgrFilterAll" onclick="filterMgrVehicles('All')">All</button>
+                <button class="filterPillBtn" id="mgrFilterCar" onclick="filterMgrVehicles('Car')">Cars</button>
+                <button class="filterPillBtn" id="mgrFilterMoto" onclick="filterMgrVehicles('Motobike')">Motorbikes</button>
+              </div>
+            </div>
+            <button class="btn btnPrimary" onclick="openAddVehicleModal()">+ Add New Vehicle</button>
+          </div>
+
+          <div class="tableResponsive">
+            <table class="appTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Vehicle</th>
+                  <th>License plate</th>
+                  <th>Type</th>
+                  <th>Specifications</th>
+                  <th>Rental Price / Day</th>
+                  <th>Status</th>
+                  <th style="text-align:center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="vehicleTableBody">
+                <tr><td colspan="8" style="text-align:center; padding: 24px;">Loading vehicle list...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="tabPanelRented" style="display: none;">
+        <div class="contentTableCard">
+          <div class="cardHeaderRow">
+            <h3 class="cardHeaderTitle">Rented Customers List</h3>
+          </div>
+          <div class="tableResponsive">
+            <table class="appTable">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Customer</th>
+                  <th>ID Card & Driver's License</th>
+                  <th>Vehicle Being Rented</th>
+                  <th>License Plate</th>
+                  <th>Rental Duration</th>
+                  <th>Total Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="rentedCustomersBody">
+                <tr><td colspan="8" style="text-align:center; padding: 24px;">Loading rented customers data...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modalOverlay" id="vehicleModal" onclick="handleManagerOverlay(event, 'vehicleModal')">
+    <div class="modalBox" style="max-width: 540px;">
+      <div class="modalHeader">
+        <h3 class="modalTitle" id="vehicleModalTitle">Add new vehicle to inventory</h3>
+        <button class="modalCloseBtn" onclick="closeVehicleModal()">✕ Exit</button>
+      </div>
+      <div class="modalBody">
+        <form id="vehicleForm" onsubmit="handleSaveVehicle(event)">
+          <input type="hidden" id="vehFormId">
+
+          <div class="formGroup">
+            <label class="formLabel">Vehicle Type *</label>
+            <select id="vehFormType" class="formControl" onchange="toggleVehicleFields()" required>
+              <option value="Car">Car</option>
+              <option value="Motobike">Motorcycle</option>
+            </select>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+            <div class="formGroup">
+              <label class="formLabel">Brand *</label>
+              <input type="text" id="vehFormBrand" class="formControl" placeholder="VD: Toyota, Honda..." required>
+            </div>
+            <div class="formGroup">
+              <label class="formLabel">Model *</label>
+              <input type="text" id="vehFormModel" class="formControl" placeholder="VD: Camry, SH 150i..." required>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+            <div class="formGroup">
+              <label class="formLabel">License Plate *</label>
+              <input type="text" id="vehFormPlate" class="formControl" placeholder="VD: 30A-999.88" required>
+            </div>
+            <div class="formGroup">
+              <label class="formLabel">Rental Price / Day (VNĐ) *</label>
+              <input type="number" id="vehFormPrice" class="formControl" placeholder="VD: 500000" min="10000" step="10000" required>
+            </div>
+          </div>
+
+          <div class="formGroup" id="groupCarSeats">
+            <label class="formLabel">Number of Seats (Car) *</label>
+            <input type="number" id="vehFormSeats" class="formControl" value="5" min="2" max="50">
+          </div>
+
+          <div class="formGroup" id="groupMotoCc" style="display: none;">
+            <label class="formLabel">Engine Capacity (Motorcycle - cc) *</label>
+            <input type="number" id="vehFormCc" class="formControl" value="150" min="50" max="2000">
+          </div>
+
+          <div class="modalFooter" style="padding:16px 0 0 0; background:transparent; border-top:none;">
+            <button type="button" class="btn btnSecondary" onclick="closeVehicleModal()">✕ Exit</button>
+            <button type="submit" class="btn btnSuccess" id="btnSaveVehicle">Save Information</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+
+.authContainerCard {
+  background: var(--panelBg);
+  border-radius: 36px;
+  padding: 44px 50px;
+  width: 100%;
+  max-width: 540px;
+  margin: 30px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.authTabsNav {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1.5px solid #cbd5e1;
+  margin-bottom: 28px;
+  gap: 48px;
+}
+
+.authTabItem {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #1e293b;
+  padding-bottom: 10px;
+  cursor: pointer;
+  position: relative;
+  border-bottom: 3.5px solid transparent;
+  margin-bottom: -2.5px;
+  transition: var(--transition);
+  text-transform: uppercase;
+}
+
+.authTabItem.active {
+  color: #000000;
+  border-bottom-color: #000000;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordToggleIcon {
+  position: absolute;
+  right: 14px;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-size: 16px;
+}
+
+.passwordToggleIcon:hover {
+  color: #475569;
+}
+
+.authSubmitBtn {
+  background: #000000;
+  color: var(--white);
+  border-radius: 9999px;
+  padding: 12px 48px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin: 24px auto 0 auto;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.authSubmitBtn:hover {
+  opacity: 0.88;
+}
+
+.quickLoginDemo {
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px dashed #cbd5e1;
+  text-align: center;
+}
+
+.quickLoginTitle {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--gray);
+  margin-bottom: 10px;
+}
+
+.quickLoginBtns {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quickPillBtn {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--grayDark);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.quickPillBtn:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+@media (max-width: 640px) {
+  .authContainerCard {
+    padding: 28px 20px;
+  }
+}
