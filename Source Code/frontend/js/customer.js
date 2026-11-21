@@ -3,9 +3,21 @@ let currentUser = null;
 let currentFilter = 'All';
 let availableVehicles = [];
 
+// Helper to safely get the active customer's numeric ID
+function getCustomerId() {
+  if (!currentUser) return 0;
+  return currentUser.userId || currentUser.id || currentUser.customerID || 0;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   currentUser = api.checkAuth(['Customer']);
   if (!currentUser) return;
+
+  const avatarEl = document.getElementById('avatarInitial');
+  if (avatarEl && currentUser.username) {
+    avatarEl.textContent = currentUser.username.charAt(0).toUpperCase();
+    avatarEl.title = `Logged in as: ${currentUser.username}`;
+  }
 
   // Load initial data
   loadVehicles();
@@ -135,12 +147,6 @@ function openRentModal(vehId) {
   document.getElementById('rentStartDate').value = today.toISOString().split('T')[0];
   document.getElementById('rentEndDate').value = tomorrow.toISOString().split('T')[0];
 
-  const depInput = document.getElementById('rentDeposit');
-  if (depInput) {
-    depInput.value = '';
-    depInput.dataset.auto = '1';
-  }
-
   calcCustomerEstimatedTotal();
 
   document.getElementById('rentModalAlert').style.display = 'none';
@@ -152,7 +158,7 @@ function closeRentModal() {
   document.getElementById('rentModal').classList.remove('active');
 }
 
-// Calculate estimated rental cost and required deposit
+// Calculate estimated rental cost
 function calcCustomerEstimatedTotal() {
   const price = parseFloat(document.getElementById('rentVehPrice').value) || 0;
   const start = document.getElementById('rentStartDate').value;
@@ -165,15 +171,8 @@ function calcCustomerEstimatedTotal() {
     if (diffDays <= 0) diffDays = 1;
 
     const total = diffDays * price;
-    const deposit = Math.round(total * 0.3); // 30% deposit
     document.getElementById('rentDaysText').textContent = `${diffDays} days`;
     document.getElementById('rentEstimatedTotal').textContent = api.formatMoney(total);
-
-    const depInput = document.getElementById('rentDeposit');
-    if (depInput && (!depInput.value || depInput.dataset.auto === '1')) {
-      depInput.value = deposit;
-      depInput.dataset.auto = '1';
-    }
   }
 }
 
@@ -185,7 +184,6 @@ async function submitCustomerRental(event) {
   const license = document.getElementById('rentLicense').value.trim();
   const start = document.getElementById('rentStartDate').value;
   const end = document.getElementById('rentEndDate').value;
-  const deposit = parseFloat(document.getElementById('rentDeposit').value) || 0;
   const alertBox = document.getElementById('rentModalAlert');
 
   if (new Date(end) < new Date(start)) {
@@ -199,13 +197,12 @@ async function submitCustomerRental(event) {
   btn.textContent = 'Processing rental...';
 
   const res = await api.post('/api/rentals/create', {
-    customerId: currentUser.userId,
+    customerId: getCustomerId(),
     vehicleId: vehId,
     cccd: cccd,
     driverLicense: license,
     startDate: start,
-    endDate: end,
-    depositAmount: deposit
+    endDate: end
   });
 
   btn.disabled = false;
@@ -232,7 +229,8 @@ async function loadRentalHistory() {
   const tbody = document.getElementById('historyTableBody');
   if (!tbody) return;
 
-  const res = await api.get(`/api/rentals/history?customerId=${currentUser.userId}`);
+  const custId = getCustomerId();
+  const res = await api.get(`/api/rentals/history?customerId=${custId}`);
 
   if (!res.success || !res.data || res.data.length === 0) {
     tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 2rem; color: var(--gray);">
@@ -285,7 +283,7 @@ async function handleReturnVehicle(orderId, vehName) {
 
   const res = await api.post('/api/rentals/return', {
     orderId: orderId,
-    customerId: currentUser.userId
+    customerId: getCustomerId()
   });
 
   if (res.success) {
@@ -300,7 +298,8 @@ async function handleReturnVehicle(orderId, vehName) {
 
 // Fetch and display customer notifications
 async function loadNotifications() {
-  const res = await api.get(`/api/notifications?customerId=${currentUser.userId}`);
+  const custId = getCustomerId();
+  const res = await api.get(`/api/notifications?customerId=${custId}`);
   const badge = document.getElementById('notifBadge');
   const container = document.getElementById('notifListContainer');
 
@@ -343,7 +342,8 @@ async function loadNotifications() {
 // Open notification modal
 function openNotifModal() {
   document.getElementById('notifModal').classList.add('active');
-  api.post('/api/notifications/mark-read', { customerId: currentUser.userId }).then(() => {
+  loadNotifications();
+  api.post('/api/notifications/mark-read', { customerId: getCustomerId() }).then(() => {
     const badge = document.getElementById('notifBadge');
     if (badge) badge.style.display = 'none';
   });
