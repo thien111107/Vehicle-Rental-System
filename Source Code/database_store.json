@@ -2,24 +2,41 @@
   "users": [
     {"id": 1, "username": "admin", "password": "admin123", "role": "Admin"},
     {"id": 2, "username": "manager1", "password": "manager123", "role": "Manager"},
-    {"id": 3, "username": "customer1", "password": "customer123", "role": "Customer", "cccd": "001200008888", "driverLicense": "B2-888999", "balance": 5}
+    {"id": 3, "username": "customer1", "password": "customer123", "role": "Customer", "cccd": "001200008888", "driverLicense": "B2-888999", "balance": 0},
+    {"id": 4, "username": "customer3", "password": "customer123", "role": "Customer", "cccd": "001201012345", "driverLicense": "B2-88992211", "balance": 0}
   ],
   "vehicles": [
-    {"id": 1, "brand": "Toyota", "model": "Camry 2.5Q", "licensePlate": "30A-999.88", "pricePerDay": 900000, "isAvailable": true, "type": "Car", "numSeats": 5},
+    {"id": 1, "brand": "Toyota", "model": "Camry 2.5Q", "licensePlate": "30A-999.88", "pricePerDay": 900000, "isAvailable": false, "type": "Car", "numSeats": 5},
     {"id": 2, "brand": "Mazda", "model": "CX-5 Premium", "licensePlate": "29B-555.22", "pricePerDay": 850000, "isAvailable": true, "type": "Car", "numSeats": 5},
-    {"id": 3, "brand": "Hyundai", "model": "SantaFe 7 Seats", "licensePlate": "30F-123.45", "pricePerDay": 1.2, "isAvailable": true, "type": "Car", "numSeats": 7},
+    {"id": 3, "brand": "Hyundai", "model": "SantaFe 7 Seats", "licensePlate": "30F-123.45", "pricePerDay": 1200000, "isAvailable": true, "type": "Car", "numSeats": 7},
     {"id": 4, "brand": "Honda", "model": "SH 150i ABS", "licensePlate": "29G1-888.88", "pricePerDay": 250000, "isAvailable": true, "type": "Motobike", "engineCapacity": 150},
     {"id": 5, "brand": "Yamaha", "model": "Exciter 155 VVA", "licensePlate": "30H2-666.99", "pricePerDay": 150000, "isAvailable": true, "type": "Motobike", "engineCapacity": 155},
-    {"id": 6, "brand": "Honda", "model": "Winner X", "licensePlate": "29K1-333.11", "pricePerDay": 1.4, "isAvailable": true, "type": "Motobike", "engineCapacity": 150}
+    {"id": 6, "brand": "Honda", "model": "Winner X", "licensePlate": "29K1-333.11", "pricePerDay": 140000, "isAvailable": true, "type": "Motobike", "engineCapacity": 150}
   ],
   "rentalOrders": [
-    {"orderId": 1, "customerId": 3, "vehicleId": 1, "cccd": "001200008888", "driverLicense": "B2-888999", "startDate": "2026-11-01", "endDate": "2026-11-04", "depositAmount": 810000, "totalAmount": 2.7, "status": "Approved"},
-    {"orderId": 2, "customerId": 3, "vehicleId": 2, "cccd": "001200008888", "driverLicense": "B2-888999", "startDate": "2026-11-15", "endDate": "2026-11-18", "depositAmount": 765000, "totalAmount": 2.55, "status": "Completed"}
+    {"orderId": 1, "customerId": 3, "vehicleId": 1, "cccd": "001200008888", "driverLicense": "B2-888999", "startDate": "2026-11-01", "endDate": "2026-11-04", "totalAmount": 2700000, "status": "Completed"},
+    {"orderId": 2, "customerId": 3, "vehicleId": 2, "cccd": "001200008888", "driverLicense": "B2-888999", "startDate": "2026-11-15", "endDate": "2026-11-18", "totalAmount": 2550000, "status": "Completed"},
+    {"orderId": 3, "customerId": 3, "vehicleId": 1, "cccd": "001200008888", "driverLicense": "B2-888999", "startDate": "2026-11-20", "endDate": "2026-11-22", "totalAmount": 1800000, "status": "Completed"},
+    {"orderId": 4, "customerId": 4, "vehicleId": 2, "cccd": "001201012345", "driverLicense": "B2-88992211", "startDate": "2026-11-16", "endDate": "2026-11-18", "totalAmount": 1700000, "status": "Completed"},
+    {"orderId": 5, "customerId": 3, "vehicleId": 4, "cccd": "001200008888", "driverLicense": "B2-888999", "startDate": "2026-11-20", "endDate": "2026-11-22", "totalAmount": 500000, "status": "Completed"},
+    {"orderId": 6, "customerId": 3, "vehicleId": 1, "cccd": "001200008888", "driverLicense": "B2-888999", "startDate": "2026-11-16", "endDate": "2026-11-18", "totalAmount": 1800000, "status": "Approved"}
   ],
   "notifications": [
     {"id": 1, "customerId": 3, "orderId": 1, "message": "Your rental order #1 for vehicle Toyota Camry 2.5Q has been APPROVED! Please proceed to receive the car.", "isRead": true},
     {"id": 2, "customerId": 3, "orderId": 2, "message": "Your rental booking request #2 for Mazda CX-5 Premium is currently PENDING approval from the manager.", "isRead": true},
     {"id": 3, "customerId": 3, "orderId": 2, "message": "Congratulations! Your rental order #2 for Mazda CX-5 Premium has been APPROVED! You may pick up your vehicle now.", "isRead": true},
-    {"id": 4, "customerId": 3, "orderId": 2, "message": "Vehicle return confirmed for order #2 (Mazda CX-5 Premium). Thank you for choosing our Vehicle Rental service!", "isRead": true}
+    {"id": 4, "customerId": 3, "orderId": 2, "message": "Vehicle return confirmed for order #2 (Mazda CX-5 Premium). Thank you for choosing our Vehicle Rental service!", "isRead": true},
+    {"id": 5, "customerId": 3, "orderId": 3, "message": "Your rental booking request #3 for Toyota Camry 2.5Q is currently PENDING approval from the manager.", "isRead": true},
+    {"id": 6, "customerId": 3, "orderId": 3, "message": "Congratulations! Your rental order #3 for Toyota Camry 2.5Q has been APPROVED! You may pick up your vehicle now.", "isRead": true},
+    {"id": 7, "customerId": 4, "orderId": 4, "message": "Your rental booking request #4 for Mazda CX-5 Premium is currently PENDING approval from the manager.", "isRead": true},
+    {"id": 8, "customerId": 4, "orderId": 4, "message": "Congratulations! Your rental order #4 for Mazda CX-5 Premium has been APPROVED! You may pick up your vehicle now.", "isRead": true},
+    {"id": 9, "customerId": 3, "orderId": 5, "message": "Your rental booking request #5 for Honda SH 150i ABS is currently PENDING approval from the manager.", "isRead": true},
+    {"id": 10, "customerId": 3, "orderId": 1, "message": "Vehicle return confirmed for order #1 (Toyota Camry 2.5Q). Thank you for choosing our Vehicle Rental service!", "isRead": true},
+    {"id": 11, "customerId": 3, "orderId": 3, "message": "Vehicle return confirmed for order #3 (Toyota Camry 2.5Q). Thank you for choosing our Vehicle Rental service!", "isRead": true},
+    {"id": 12, "customerId": 3, "orderId": 5, "message": "Congratulations! Your rental order #5 for Honda SH 150i ABS has been APPROVED! You may pick up your vehicle now.", "isRead": true},
+    {"id": 13, "customerId": 3, "orderId": 5, "message": "Vehicle return confirmed for order #5 (Honda SH 150i ABS). Thank you for choosing our Vehicle Rental service!", "isRead": true},
+    {"id": 14, "customerId": 4, "orderId": 4, "message": "Vehicle return confirmed for order #4 (Mazda CX-5 Premium). Thank you for choosing our Vehicle Rental service!", "isRead": true},
+    {"id": 15, "customerId": 3, "orderId": 6, "message": "Your rental booking request #6 for Toyota Camry 2.5Q is currently PENDING approval from the manager.", "isRead": false},
+    {"id": 16, "customerId": 3, "orderId": 6, "message": "Congratulations! Your rental order #6 for Toyota Camry 2.5Q has been APPROVED! You may pick up your vehicle now.", "isRead": false}
   ]
 }
