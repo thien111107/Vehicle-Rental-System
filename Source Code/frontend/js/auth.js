@@ -30,13 +30,6 @@ function showAlert(messageText, isSuccess = false) {
   alertBox.style.display = 'block';
 }
 
-// Quick fill helper for demo accounts
-function quickFill(user, pass) {
-  switchAuthTab('login');
-  document.getElementById('loginUsername').value = user;
-  document.getElementById('loginPassword').value = pass;
-}
-
 // Process login form submission
 async function handleLogin(event) {
   event.preventDefault();
