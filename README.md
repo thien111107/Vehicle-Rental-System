@@ -115,37 +115,4 @@ Prerequisites: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
    docker compose up -d
 ---
 
-## 5. Project Directory Structure
 
-```text
-VehicleRentalSystem/
-├── backend/
-│   ├── controllers/      # AuthController, VehicleController, RentalController, etc.
-│   ├── database/         # DatabaseConnection (Singleton JSON file manager)
-│   ├── http/             # HttpServer (TCP Sockets) and Router (REST & Static)
-│   ├── models/           # User, Customer, Manager, Admin, Vehicle, Car, Motobike, RentalOrder
-│   └── main.cpp          # Application entry point
-├── frontend/
-│   ├── css/              # Responsive stylesheets (dashboard.css, customer.css, etc.)
-│   ├── js/               # API clients and view controllers (customer.js, manager.js, etc.)
-│   ├── index.html        # Authentication view
-│   ├── customer.html     # Customer portal
-│   ├── manager.html      # Manager portal
-│   └── admin.html        # Superuser portal
-├── tests/
-│   ├── googletest/       # Google Test framework source
-│   └── unit_tests.cpp    # OOP and business logic test suite
-├── database_store.json   # Persistent JSON database
-├── Dockerfile            # Multi-stage production container build
-├── docker-compose.yml    # Service orchestration
-├── .dockerignore         # Docker ignore rules
-├── .gitignore            # Git ignore rules
-└── README.md             # Project documentation
-```
-
----
-
-## 6. Testing & Quality Assurance
-
-- **Unit Testing:** Implemented using **Google Test**. Covers polymorphic vehicle instantiations, dynamic inheritance behavior, customer balance mutations, and state machine transitions of rental orders.
-- **Functional Testing:** Detailed test cases documented in [`TESTING_DOCUMENT.md`](file:///c:/Vehicle1/TESTING_DOCUMENT.md) and [`TestCases_VehicleRental.csv`](file:///c:/Vehicle1/TestCases_VehicleRental.csv).
