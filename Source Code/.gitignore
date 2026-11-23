@@ -1,0 +1,19 @@
+# Compiled binaries and executables
+*.exe
+*.o
+*.obj
+*.dll
+server.exe
+run_tests.exe
+*.bat
+
+# Editor and IDE directories
+.vscode/
+.idea/
+*.swp
+*.log
+
+# OS metadata
+Thumbs.db
+Desktop.ini
+.DS_Store
