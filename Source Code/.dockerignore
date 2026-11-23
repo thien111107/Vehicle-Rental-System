@@ -1,0 +1,8 @@
+.git
+.gitignore
+*.exe
+*.o
+*.bat
+tests/googletest
+run_tests.exe
+.vscode/
