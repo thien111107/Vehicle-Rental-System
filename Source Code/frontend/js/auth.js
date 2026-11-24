@@ -1,13 +1,15 @@
 // Authentication handling for login and customer registration
 
 // Switch between Login and Register tabs
-function switchAuthTab(type) {
+function switchAuthTab(type, keepAlert = false) {
   const loginBtn = document.getElementById('tabLoginBtn');
   const regBtn = document.getElementById('tabRegisterBtn');
   const loginForm = document.getElementById('loginForm');
   const regForm = document.getElementById('registerForm');
   const alertBox = document.getElementById('authAlert');
-  alertBox.style.display = 'none';
+  if (!keepAlert && alertBox) {
+    alertBox.style.display = 'none';
+  }
 
   if (type === 'login') {
     loginBtn.classList.add('active');
@@ -28,6 +30,13 @@ function showAlert(messageText, isSuccess = false) {
   alertBox.textContent = messageText;
   alertBox.className = `alertBox ${isSuccess ? 'alertSuccess' : 'alertDanger'}`;
   alertBox.style.display = 'block';
+}
+
+// Quick fill helper for demo accounts
+function quickFill(user, pass) {
+  switchAuthTab('login');
+  document.getElementById('loginUsername').value = user;
+  document.getElementById('loginPassword').value = pass;
 }
 
 // Process login form submission
@@ -54,7 +63,21 @@ async function handleLogin(event) {
       }
     }, 600);
   } else {
-    showAlert(res.message || 'Invalid username or password!');
+    const errorMsg = res.message || 'Invalid username or password!';
+    showAlert(`${errorMsg} Switching to Sign Up...`, false);
+
+    setTimeout(() => {
+      switchAuthTab('register', true);
+      showAlert('Account not found or invalid credentials. Please register for a new account!', false);
+      const regUser = document.getElementById('regUsername');
+      const regPass = document.getElementById('regPassword');
+      if (regUser && username) {
+        regUser.value = username;
+      }
+      if (regPass) {
+        regPass.focus();
+      }
+    }, 1200);
   }
 }
 
